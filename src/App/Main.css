@@ -1,0 +1,37 @@
+.champion-guesser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 550px;
+}
+
+.champion-input-section {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 550px;
+  margin-bottom: 3rem;
+}
+
+.champion-random-quote-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  width: 550px;
+  height: 200px;
+  background-color: var(--lol-background-color);
+  border: var(--lol-border);
+  color: var(--lol-text-color);
+}
+.hint-box {
+  width: 100%;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+  margin-bottom: 1rem;
+}

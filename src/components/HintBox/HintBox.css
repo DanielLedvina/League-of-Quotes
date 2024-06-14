@@ -1,0 +1,23 @@
+.champion-hint-box {
+  display: flex;
+  flex-direction: column;
+}
+.champion-hint-values,
+.champion-hint-headings {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.champion-img,
+.hint-value,
+.hint-heading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+.hint-heading {
+  box-shadow: inset 0 0 10px #f8a100;
+}

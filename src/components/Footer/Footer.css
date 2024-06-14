@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.credits {
+  display: none;
+}
+.social-media img {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
+.social-media {
+  display: flex;
+}

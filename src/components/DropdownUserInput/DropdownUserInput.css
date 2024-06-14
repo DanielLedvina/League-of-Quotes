@@ -1,0 +1,62 @@
+.champion-input {
+  outline: none;
+  height: 4rem;
+  font-size: 2rem;
+  width: 550px;
+  background-color: var(--lol-background-color);
+  border: var(--lol-border);
+  color: var(--lol-text-color);
+  opacity: 0.9;
+}
+.filtered-names {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  width: 550px;
+  padding: 0;
+  position: absolute;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+}
+.champion-select {
+  display: flex;
+  padding: 5px;
+  width: 550px;
+  border-bottom: 1px solid var(--lol-gold);
+}
+li p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.champion-select-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.champion-select-name {
+  font-size: 1.5rem;
+}
+.champion-input::placeholder {
+  text-align: center;
+}
+.champion-input:hover {
+  opacity: 1;
+}
+.champion-input:focus {
+  opacity: 1;
+}
+.champion-input:focus::placeholder {
+  color: transparent;
+}
+.champion-new-guess-button {
+  cursor: pointer;
+  outline: none;
+  border-style: solid;
+  height: 4rem;
+  font-size: 2rem;
+  width: 100%;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+  border: 1px solid #a09b8c;
+}

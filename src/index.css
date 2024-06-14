@@ -1,13 +1,190 @@
-body {
+@import url(https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold);
+@font-face {
+  font-family: "Beaufort for LOL Bold";
+  src: url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot");
+  src: url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.woff") format("woff"), url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.svg#Beaufort for LOL Bold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --lol-gold: #c89b3c;
+  --lol-background-color: #010a13;
+  --lol-border: 2px solid var(--lol-gold);
+  --lol-text-color: #f0e6d2;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Beaufort for LOL Bold";
+}
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Beaufort for LOL Bold";
+}
+::-webkit-scrollbar {
+  width: 0.8rem;
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: var(--lol-background-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--lol-gold);
+  border: 3px solid var(--lol-background-color);
+  border-radius: 2rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(41, 56%, 47%);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body,
+#root,
+.App {
+  height: auto;
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  display: block;
+  background-image: url("../public/images/background/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
+  z-index: 1; /* Ensure the overlay is above the background but below the content */
+}
+
+body > * {
+  position: relative;
+  z-index: 2; /* Ensure content is above the overlay */
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+section {
+  display: inline-block;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next,
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .champion-new-guess-button {
+    height: 4rem;
+    font-size: 1.5rem;
+    width: 450px;
+  }
+  .champion-input {
+    height: 4rem;
+    font-size: 1.5rem;
+    width: 450px;
+  }
+  .champion-random-quote-section {
+    width: 450px !important;
+    font-size: 1.2rem !important;
+  }
+  .league-of-quotes-heading {
+    font-size: 3.5rem !important;
+  }
+  .correct-guess {
+    width: 450px !important;
+  }
+  .hint-box {
+    width: 450px !important;
+  }
+}
+@media (max-width: 497px) {
+  .champion-new-guess-button {
+    height: 4rem;
+    width: 400px;
+  }
+  .champion-input {
+    height: 4rem;
+    width: 400px;
+  }
+  .champion-random-quote-section {
+    width: 400px !important;
+  }
+  .league-of-quotes-heading {
+    font-size: 3rem !important;
+  }
+  .correct-guess {
+    width: 400px !important;
+  }
+  .hint-box {
+    width: 400px !important;
+  }
+}
+@media (max-width: 425px) {
+  .champion-new-guess-button {
+    height: 4rem;
+    width: 280px;
+  }
+  .champion-input {
+    height: 4rem;
+    width: 280px;
+  }
+  .champion-random-quote-section {
+    width: 280px !important;
+    font-size: 1rem !important;
+  }
+  .league-of-quotes-heading {
+    font-size: 2.3rem !important;
+  }
+  .correct-guess {
+    width: 280px !important;
+  }
+  .hint-box {
+    width: 280px !important;
+  }
 }

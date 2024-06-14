@@ -1,0 +1,148 @@
+.login {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 550px;
+  height: 100%;
+}
+.champion-select-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.champion-select-name {
+  font-size: 1.5rem;
+}
+
+.login-inputs,
+.login-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.login-inputs input {
+  padding: 5px;
+  height: 4rem;
+  font-size: 2rem;
+  width: 350px;
+  background-color: var(--lol-background-color);
+  border: var(--lol-border);
+  color: var(--lol-text-color);
+}
+.login-inputs label {
+  display: flex;
+  margin: 5px 0;
+  font-size: 1.2rem;
+  width: 350px;
+  color: var(--lol-text-color);
+}
+
+.login-buttons {
+  margin-top: 2rem;
+}
+
+.login-button,
+.register-button {
+  cursor: pointer;
+  outline: none;
+  border-style: solid;
+  margin-bottom: 3px;
+  height: 3rem;
+  font-size: 1.5rem;
+  width: 350px;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+  border: 1px solid #a09b8c;
+}
+
+.logined {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+}
+li p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* USER SECTION */
+.users-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: center;
+  padding: 5px;
+  border: var(--lol-border);
+}
+.users-welcome {
+  font-size: 3rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.users-name,
+.users-champion,
+.users-quote,
+.users-background {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  height: 4rem;
+  font-size: 1.3rem; /* Smaller size for headings */
+  align-items: center;
+  border-top: 1px solid #c89b3c;
+}
+
+.users-info .info-details {
+  font-size: 1.2rem; /* Even smaller size for the details */
+  margin-left: 1rem; /* Indent the details */
+}
+
+.user-filtered-names {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  width: 200px;
+  position: absolute;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+}
+
+.user-champion-select {
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px solid var(--lol-gold);
+}
+.user-champion-select-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.user-champion-input {
+  outline: none;
+  width: 200px;
+  height: 25%;
+  font-size: 1.2rem;
+  padding: 5px;
+  background-color: var(--lol-background-color);
+  border: var(--lol-border);
+  color: var(--lol-text-color);
+  opacity: 0.9;
+}
+.user-champion-new-guess-button {
+  cursor: pointer;
+  outline: none;
+  border-style: solid;
+  height: 4rem;
+  font-size: 2rem;
+  width: 100%;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+  border: 1px solid #a09b8c;
+}
