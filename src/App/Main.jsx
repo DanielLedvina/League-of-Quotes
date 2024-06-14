@@ -171,13 +171,18 @@ const Main = () => {
             </button>
           </section>
           <CorrectGuess correctGuess={correctGuess} feedbackGuess={feedback} />
-          <section className='hint-box'>
+          <section className='hint-box-section'>
             {hintBoxesData.length > 0 && (
               <section className='champion-hint-headings'>
                 {hintHeadingProp.map((prop) => (
-                  <p className='hint-heading' key={prop.text}>
-                    {prop.text}
-                  </p>
+                  <>
+                    <div className='hint-heding-values'>
+                      <p className='hint-heading' key={prop.text}>
+                        {prop.text}
+                      </p>
+                      <hr />
+                    </div>
+                  </>
                 ))}
               </section>
             )}

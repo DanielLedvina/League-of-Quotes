@@ -1,23 +1,34 @@
+.hint-box {
+  width: 100%;
+}
 .champion-hint-box {
   display: flex;
   flex-direction: column;
+  margin-bottom: 5px;
 }
-.champion-hint-values,
-.champion-hint-headings {
+.champion-hint-values {
   display: flex;
   text-align: center;
   justify-content: center;
 }
 
 .champion-img,
-.hint-value,
-.hint-heading {
+.hint-value {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 5px;
+  margin: 0 1px;
+  /* inset x-offset y-offset blur-radius color */
 }
-.hint-heading {
-  box-shadow: inset 0 0 10px #f8a100;
+
+.champion-img,
+.hint-value:hover {
+  box-shadow: inset 0px 0px 10px 0px #c89b3c;
+  transition: 0.3s;
+}
+.hint-value:first-child,
+.hint-value:last-child {
+  margin: 0 0 0 1px;
 }

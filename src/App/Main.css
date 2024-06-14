@@ -21,7 +21,7 @@
   align-items: center;
   text-align: center;
   margin: 0 auto;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   font-size: 2rem;
   width: 550px;
   height: 200px;
@@ -29,9 +29,46 @@
   border: var(--lol-border);
   color: var(--lol-text-color);
 }
-.hint-box {
+.champion-new-guess-button {
+  cursor: pointer;
+  outline: none;
+  border-style: solid;
+  margin-top: 3px;
+  height: 4rem;
+  font-size: 2rem;
   width: 100%;
   background-color: var(--lol-background-color);
   color: var(--lol-text-color);
+  border: 2px solid #0397ab;
+}
+.hint-box-section {
+  width: 100%;
+  color: var(--lol-text-color);
   margin-bottom: 1rem;
+}
+.champion-hint-headings {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.hint-heding-values {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hint-heding-values hr {
+  display: flex;
+  width: 70%;
+  margin: auto;
+}
+.hint-heading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 10px 0; /* Adjusted for top and bottom only */
+  position: relative; /* Essential for positioning the pseudo-element */
+  margin: 0 5px; /* Slight separation between headings */
+  color: var(--lol-text-color);
+  padding-bottom: 4px; /* Ensure space for the line */
 }
