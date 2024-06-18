@@ -31,7 +31,7 @@ app.use(
 );
 
 const corsOptions = {
-  origin: "http://localhost:3000", // or whichever port your frontend is on
+  origin: "http://localhost:3000",
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -166,14 +166,14 @@ app.post("/api/changeUser1Champion", (req, res) => {
 });
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: process.env.EMAILHOST,
   port: 465,
   secure: true, // Use true for port 465
   auth: {
-    user: "leagueofquotes.loq@gmail.com",
-    pass: "mwkh gmst lfvl iziq",
-    clientId: "55280600050-khsneq3002dquhna6b8mdn3oennlg7kv.apps.googleusercontent.com",
-    clientSecret: "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",
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+    clientId: process.env.CLIENTID,
+    clientSecret: process.env.CLIENTSECRET,
   },
   tls: {
     rejectUnauthorized: false, // This allows self-signed certificates
@@ -201,8 +201,8 @@ app.post("/api/register", async (req, res) => {
   };
 
   const mailOptions = {
-    from: "leagueofquotes.loq@gmail.com", // Sender email
-    to: email, // Recipient email
+    from: process.env.EMAIL,
+    to: email,
     subject: "Account Verification",
     text: `Hi ${username}, please verify your account by clicking on this link: http://localhost:${localhostPort}/verify?token=${verificationToken}`,
   };

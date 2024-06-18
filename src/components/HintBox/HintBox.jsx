@@ -5,6 +5,7 @@ export default function HintBox({quessedChampion = {}, realChampion = {}}) {
   const championProp = [{key: "champion", type: "image"}, {key: "release"}, {key: "position"}, {key: "resource"}, {key: "rangeType"}, {key: "region"}];
   const rightGuessColor = "#0397AB"; //#005A82(BLUE 4) #6a940e #0397AB(BLUE 3)
   const falseGuessColor = "#1E2328"; // #1E2328(grey 3) #9c312b
+  const championImgBg = "black";
   return (
     <section className="champion-hint-box">
       <section className="champion-hint-values">
@@ -13,7 +14,7 @@ export default function HintBox({quessedChampion = {}, realChampion = {}}) {
             className="hint-value"
             key={prop.key}
             style={{
-              backgroundColor: prop.type !== "image" && quessedChampion[prop.key] === realChampion[prop.key] ? rightGuessColor : prop.type !== "image" ? falseGuessColor : "black",
+              backgroundColor: prop.type !== "image" && quessedChampion[prop.key] === realChampion[prop.key] ? rightGuessColor : prop.type !== "image" ? falseGuessColor : championImgBg,
             }}
           >
             {prop.type === "image" ? (

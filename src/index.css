@@ -43,6 +43,7 @@
 * {
   margin: 0;
   font-family: "Beaufort for LOL Bold";
+  cursor: url("/public/images/cursors/normal.webp"), auto !important;
 }
 ::-webkit-scrollbar {
   width: 0.8rem;
@@ -64,11 +65,13 @@ html,
 body,
 #root,
 .App {
+  width: 100%;
+  margin: 0;
+  padding: 0;
   height: auto;
   min-height: 100%;
   position: relative;
 }
-
 body {
   display: block;
   background-image: url("../public/images/background/background.jpg");
@@ -77,6 +80,19 @@ body {
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
+}
+ul,
+li,
+a,
+img,
+button,
+.nav-link,
+.bottom-links,
+.league-of-quotes-heading {
+  cursor: url("/public/images/cursors/link.webp"), pointer !important;
+}
+input {
+  cursor: url("/public/images/cursors/input.webp"), auto !important;
 }
 
 body::before {

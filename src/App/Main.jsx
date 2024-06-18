@@ -22,6 +22,7 @@ const Main = () => {
   const quoteRef = useRef(null);
   const quoteContainerRef = useRef(null);
   const [championGuessed, setChampionGuessed] = useState([]);
+  let guessedChampions = useRef([]);
 
   const hintHeadingProp = [{text: "Champion"}, {text: "Release date"}, {text: "Position"}, {text: "Resource"}, {text: "Range type"}, {text: "Region"}];
 
@@ -33,6 +34,7 @@ const Main = () => {
         parent: document.querySelector(".champion-random-quote-section"),
       });
     }
+    console.log(guessedChampions);
   }, [loading]);
 
   useEffect(() => {
@@ -106,7 +108,8 @@ const Main = () => {
 
     const formattedInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
     const guessedChampion = champions[formattedInput];
-
+    guessedChampions.current = [...guessedChampions.current, guessedChampion];
+    console.log(guessedChampions);
     if (guessedChampion) {
       const {release, position, resource, rangeType, region, image} = guessedChampion;
       if (formattedInput.toLowerCase() === quoteData.champion.toLowerCase()) {
@@ -121,7 +124,6 @@ const Main = () => {
         });
 
         setFeedback("Correct! Well played. Try the next one!");
-        setHintBoxesData([]);
         setChampionGuessed([]); // Reset guessed champions on correct guess
       } else {
         setFeedback("Not quite right, keep guessing!");
@@ -164,7 +166,7 @@ const Main = () => {
             </p>
           </section>
           <section className="champion-input-section">
-            <DropdownUserInput onGuess={handleGuess} disabled={!!correctGuess} championGuessed={championGuessed} />
+            <DropdownUserInput onGuess={handleGuess} disabled={!!correctGuess} championGuessed={championGuessed} ref={guessedChampions} />
 
             <button className="champion-new-guess-button" onClick={startNewGuess}>
               New Quote

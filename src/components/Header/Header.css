@@ -16,14 +16,7 @@
 .nav-bar a {
   margin: 8px;
 }
-.nav-link {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  transition: transform 0.2s;
-}
+
 .league-of-quotes-heading {
   display: inline-block;
   font-size: 4rem;
@@ -37,28 +30,37 @@
 .profile-pfp {
   border-radius: 5px;
 }
+.nav-link {
+  position: relative; /* Essential for positioning the tooltip */
+  display: flex;
+  align-items: center; /* Center the items vertically */
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
 .tooltip-container {
-  position: relative;
-  display: inline-block;
+  display: inline-block; /* Ensures the container is only as wide as its contents */
+  position: relative; /* Context for absolute positioning of the tooltip */
 }
 
 .tooltip-text {
   visibility: hidden;
-  width: 100px;
+  width: 120px; /* Adjust width based on content */
   background-color: var(--lol-hextech-black);
   color: var(--lol-text-color);
   text-align: center;
   border-radius: 5px;
   padding: 5px 0;
   position: absolute;
-  bottom: 105%;
+  bottom: 100%; /* Position below the element */
   left: 50%;
-  margin-left: -55px;
+  transform: translateX(-50%); /* Center the tooltip */
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
-.tooltip-container:hover .tooltip-text {
+.nav-link:hover + .tooltip-text {
   visibility: visible;
   opacity: 1;
 }

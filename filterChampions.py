@@ -1,22 +1,74 @@
-import base64
-import time
-
 import requests
 from bs4 import BeautifulSoup
 import json
 import shutil
 import os
 
+public_dir = os.path.join('public', 'images', 'champion-pfp')
+os.makedirs(public_dir, exist_ok=True)
+
+# New directories for splash arts and figures
+splashart_dir = os.path.join('public', 'images', 'champion-splashart')
+figure_dir = os.path.join('public', 'images', 'champion-figure')
+os.makedirs(splashart_dir, exist_ok=True)
+os.makedirs(figure_dir, exist_ok=True)
+
+
+# Function to download images
+def download_image(url, path):
+    try:
+        response = requests.get(url, stream=True)
+        if response.status_code == 200:
+            with open(path, 'wb') as out_file:
+                shutil.copyfileobj(response.raw, out_file)
+            print(f"Downloaded image successfully: {path}")
+        else:
+            print(f"Failed to download image from {url} - Status code: {response.status_code}")
+    except requests.RequestException as e:
+        print(f"Request failed for {url}: {e}")
+    except IOError as e:
+        print(f"Failed to save image to {path}: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+def scrape_cosmetics(soup_cosmetics, splashart_dir, champion):
+    # Extract all divs with the class 'skin-icon' which contains links to full cosmetic images
+    cosmetics_divs = soup_cosmetics.find_all('div', class_="skin-icon")
+    print(f"Found {len(cosmetics_divs)} cosmetics divs.")  # Debugging to confirm correct divs are found
+
+    for div in cosmetics_divs:
+        a_tag = div.find('a')  # Find the first <a> tag that contains the link to the image
+        if a_tag:
+            img_tag = a_tag.find('img')  # Find the img tag within the a tag to get the alt attribute
+            if img_tag and 'alt' in img_tag.attrs:
+                alt_text = img_tag['alt']
+                print(f"Original alt text: {alt_text}")  # Debugging to see the original alt text
+                # Process the alt text to create a filename
+                skin_parts = alt_text.replace('Skin', '').split()  # Remove 'Skin' and split by spaces
+                skin_parts = [part for part in skin_parts if part != champion]  # Remove the champion name
+                skin_name = ' '.join(skin_parts)  # Join the remaining parts
+                new_name = f"{skin_name} {champion}".strip()  # Create the new name
+                img_url = a_tag['href']
+                if img_url:
+                    print(f"Downloading image from {img_url} as {new_name}")
+                    download_image(img_url, os.path.join(splashart_dir, f"{new_name}.png"))
+                else:
+                    print("No valid href found in <a> tag.")
+            else:
+                print("No img tag or 'alt' attribute found.")
+        else:
+            print("No <a> tag found.")
+
+# Example usage:
+# Assuming `soup_cosmetics` and `splashart_dir` are defined and the 'champion' variable is known
+# scrape_cosmetics(soup_cosmetics, splashart_dir, "Akali")
 # Load excluded phrases from a JSON file
 with open('excluded_phrases.json', 'r') as file:
     excluded_data = json.load(file)
     phrases_to_exclude = excluded_data['excluded_phrases']
 
-public_dir = os.path.join('public', 'images', 'champion-pfp')
-os.makedirs(public_dir, exist_ok=True)
-
 # List of champions to scrape
-champions = ["Azir", "Nami", "Poppy", "Akali"]  # Including 'Poppy' as an example with multiple positions
+champions = ["Azir", "Nami", "Poppy", "Akali"]
 
 # Initialize the main dictionary to store quotes and positions
 quotes_dict = {"quotes": {"champions": {}}}
@@ -31,16 +83,19 @@ for champion in champions:
     champion_audio = f"https://leagueoflegends.fandom.com/wiki/{champion}/LoL/Audio"
     champion_lol = f"https://leagueoflegends.fandom.com/wiki/{champion}/LoL"
     champion_universe = f"https://leagueoflegends.fandom.com/wiki/{champion}"
+    champion_cosmetics = f"https://leagueoflegends.fandom.com/wiki/{champion}/LoL/Cosmetics"
 
     # Make GET requests to fetch the pages
     page_audio = requests.get(champion_audio)
     page_lol = requests.get(champion_lol)
     page_universe = requests.get(champion_universe)
+    page_cosmetics = requests.get(champion_cosmetics)
 
     # Create Beautiful Soup objects with the HTML content
     soup_audio = BeautifulSoup(page_audio.content, "html.parser")
     soup_lol = BeautifulSoup(page_lol.content, "html.parser")
     soup_universe = BeautifulSoup(page_universe.content, "html.parser")
+    soup_cosmetics = BeautifulSoup(page_cosmetics.content, "html.parser")
 
     # List of sections to exclude
     exclude_sections = ["Taunt", "Joke", "Laugh", "Sound Effects", "Ability Casting", "Death"]
@@ -157,6 +212,17 @@ for champion in champions:
             match = re.search(r"Champion difficulty (\d+)", difficulty_alt)
             if match:
                 difficulty_level = match.group(1)
+
+    # Download image from the figure tag
+    figure = soup_lol.find('figure', class_='pi-item pi-image')
+    if figure:
+        a_tag = figure.find('a')
+        if a_tag and 'href' in a_tag.attrs:
+            img_url = a_tag['href']
+            download_image(img_url, os.path.join(figure_dir, f"{champion}.png"))
+
+    # Download splash-arts
+    scrape_cosmetics(soup_cosmetics, splashart_dir, champion)
 
     # Adding to dictionary
     quotes_dict["quotes"]["champions"][champion] = {
