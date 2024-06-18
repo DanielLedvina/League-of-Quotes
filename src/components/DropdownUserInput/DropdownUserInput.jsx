@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, {useState, useRef} from "react";
 import "./DropdownUserInput.css";
-import { useAppContext } from "../../context/AppContext"; // Import the context
+import {useAppContext} from "../../context/AppContext"; // Import the context
 
-const DropdownUserInput = ({ onGuess, disabled, championGuessed }) => {
-  const { champions, loading } = useAppContext(); // Use context to get champions and loading
+const DropdownUserInput = ({onGuess, disabled, championGuessed}) => {
+  const {champions, loading} = useAppContext(); // Use context to get champions and loading
   const [input, setInput] = useState("");
   const [filteredNames, setFilteredNames] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -102,7 +102,7 @@ const DropdownUserInput = ({ onGuess, disabled, championGuessed }) => {
       {isFocused && filteredNames.length > 0 ? (
         <ul className="filtered-names">
           {filteredNames.slice(0, 4).map((name, index) => (
-            <li className="champion-select" key={name} onMouseDown={(e) => e.preventDefault()} onClick={() => handleListItemClick(name)} onMouseEnter={() => setSelectedIndex(index)} style={{ backgroundColor: index === selectedIndex ? "#7f7f7f" : "transparent" }}>
+            <li className="champion-select" key={name} onMouseDown={(e) => e.preventDefault()} onClick={() => handleListItemClick(name)} onMouseEnter={() => setSelectedIndex(index)} style={{backgroundColor: index === selectedIndex ? "#7f7f7f" : "transparent"}}>
               <img className="champion-select-img" src={`/images/champion-pfp/${name}.png`} alt={name + " img"} loading="lazy" />
               <p className="champion-select-name">{name}</p>
             </li>

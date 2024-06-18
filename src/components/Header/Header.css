@@ -44,16 +44,16 @@
 
 .tooltip-text {
   visibility: hidden;
-  width: 150px;
-  background-color: black;
-  color: #fff;
+  width: 100px;
+  background-color: var(--lol-hextech-black);
+  color: var(--lol-text-color);
   text-align: center;
   border-radius: 5px;
   padding: 5px 0;
   position: absolute;
-  bottom: 105%; /* Position the tooltip above the link */
+  bottom: 105%;
   left: 50%;
-  margin-left: -75px; /* Use half of the width (150/2 = 75), to center the tooltip */
+  margin-left: -55px;
   opacity: 0;
   transition: opacity 0.3s;
 }

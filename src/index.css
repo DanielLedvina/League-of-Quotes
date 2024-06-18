@@ -8,9 +8,30 @@
   font-display: swap;
 }
 :root {
+  --lol-blue-1: #cdfafa;
+  --lol-blue-2: #0ac8b9;
+  --lol-blue-3: #0397ab;
+  --lol-blue-4: #005a82;
+  --lol-blue-5: #0a323c;
+  --lol-blue-6: #091428;
+  --lol-blue-7: #0a1428;
+  --lol-gold-1: #f0e6d2;
+  --lol-gold-2: #c8aa6e;
+  --lol-gold-3: #c8aa6e;
+  --lol-gold-4: #c89b3c;
+  --lol-gold-5: #785a28;
+  --lol-gold-6: #463714;
+  --lol-gold-7: #32281e;
+  --lol-grey-1: #a09b8c;
+  --lol-grey-1-point-5: #5b5a56;
+  --lol-grey-2: #3c3c41;
+  --lol-grey-3: #1e2328;
+  --lol-grey-cool: #1e282d;
+  --lol-hextech-black: #010a13;
   --lol-gold: #c89b3c;
   --lol-background-color: #010a13;
-  --lol-border: 2px solid var(--lol-gold);
+  --lol-border-gold: 2px solid var(--lol-gold);
+  --lol-border-grey: 1px solid #a09b8c;
   --lol-text-color: #f0e6d2;
 }
 *,

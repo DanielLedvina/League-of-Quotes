@@ -2,10 +2,9 @@
   outline: none;
   height: 4rem;
   font-size: 2rem;
-  margin-bottom: 0.2rem;
   width: 550px;
   background-color: var(--lol-background-color);
-  border: var(--lol-border);
+  border: var(--lol-border-gold);
   color: var(--lol-text-color);
   opacity: 0.9;
 }

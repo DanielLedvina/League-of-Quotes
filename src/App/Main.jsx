@@ -120,7 +120,6 @@ const Main = () => {
           image,
         });
 
-        setQuoteData(getRandomChampionAndQuote());
         setFeedback("Correct! Well played. Try the next one!");
         setHintBoxesData([]);
         setChampionGuessed([]); // Reset guessed champions on correct guess
@@ -151,33 +150,34 @@ const Main = () => {
     setHintBoxesData([]);
     setQuoteData(getRandomChampionAndQuote());
     setFeedback("");
+    setChampionGuessed([]);
   }
 
   return (
-    <div className='App'>
+    <div className="App">
       <Header />
       {!loading && champions && (
-        <section className='champion-guesser'>
-          <section className='champion-random-quote-section' ref={quoteContainerRef}>
-            <p className='champion-quote' ref={quoteRef}>
+        <section className="champion-guesser">
+          <section className="champion-random-quote-section" ref={quoteContainerRef}>
+            <p className="champion-quote" ref={quoteRef}>
               {quoteData?.quote}
             </p>
           </section>
-          <section className='champion-input-section'>
+          <section className="champion-input-section">
             <DropdownUserInput onGuess={handleGuess} disabled={!!correctGuess} championGuessed={championGuessed} />
 
-            <button className='champion-new-guess-button' onClick={startNewGuess}>
+            <button className="champion-new-guess-button" onClick={startNewGuess}>
               New Quote
             </button>
           </section>
           <CorrectGuess correctGuess={correctGuess} feedbackGuess={feedback} />
-          <section className='hint-box-section'>
+          <section className="hint-box-section">
             {hintBoxesData.length > 0 && (
-              <section className='champion-hint-headings'>
+              <section className="champion-hint-headings">
                 {hintHeadingProp.map((prop) => (
                   <>
-                    <div className='hint-heding-values'>
-                      <p className='hint-heading' key={prop.text}>
+                    <div className="hint-heding-values">
+                      <p className="hint-heading" key={prop.text}>
                         {prop.text}
                       </p>
                       <hr />

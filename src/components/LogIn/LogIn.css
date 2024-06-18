@@ -27,7 +27,7 @@
   font-size: 2rem;
   width: 350px;
   background-color: var(--lol-background-color);
-  border: var(--lol-border);
+  border: var(--lol-border-gold);
   color: var(--lol-text-color);
 }
 .login-inputs label {
@@ -75,7 +75,7 @@ li p {
   justify-content: left;
   text-align: center;
   padding: 5px;
-  border: var(--lol-border);
+  border: var(--lol-border-gold);
 }
 .users-welcome {
   font-size: 3rem;
@@ -131,7 +131,7 @@ li p {
   font-size: 1.2rem;
   padding: 5px;
   background-color: var(--lol-background-color);
-  border: var(--lol-border);
+  border: var(--lol-border-gold);
   color: var(--lol-text-color);
   opacity: 0.9;
 }

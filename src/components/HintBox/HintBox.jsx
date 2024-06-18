@@ -3,23 +3,30 @@ import "./HintBox.css";
 
 export default function HintBox({quessedChampion = {}, realChampion = {}}) {
   const championProp = [{key: "champion", type: "image"}, {key: "release"}, {key: "position"}, {key: "resource"}, {key: "rangeType"}, {key: "region"}];
-  const rightGuessColor = "#6a940e"; //#005A82 #6a940e
-  const falseGuessColor = "#1E2328"; // #1E2328 #9c312b
+  const rightGuessColor = "#0397AB"; //#005A82(BLUE 4) #6a940e #0397AB(BLUE 3)
+  const falseGuessColor = "#1E2328"; // #1E2328(grey 3) #9c312b
   return (
-    <div className='champion-hint-box'>
-      <div className='champion-hint-values'>
+    <section className="champion-hint-box">
+      <section className="champion-hint-values">
         {championProp.map((prop) => (
           <div
-            className='hint-value'
+            className="hint-value"
             key={prop.key}
             style={{
-              backgroundColor: prop.type !== "image" && quessedChampion[prop.key] === realChampion[prop.key] ? rightGuessColor : prop.type !== "image" ? falseGuessColor : "transparent",
+              backgroundColor: prop.type !== "image" && quessedChampion[prop.key] === realChampion[prop.key] ? rightGuessColor : prop.type !== "image" ? falseGuessColor : "black",
             }}
           >
-            {prop.type === "image" ? <img src={`images/champion-pfp/${quessedChampion.champion || "default"}.png`} alt={quessedChampion.champion} style={{width: "50px", height: "50px"}} /> : quessedChampion[prop.key]}
+            {prop.type === "image" ? (
+              <>
+                <img src={`images/champion-pfp/${quessedChampion.champion || "default"}.png`} className="champion-img" alt={quessedChampion.champion} />
+                <span className="tooltip-img">{quessedChampion.champion}</span>
+              </>
+            ) : (
+              <p className="champion-atribute">{quessedChampion[prop.key]}</p>
+            )}
           </div>
         ))}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }
