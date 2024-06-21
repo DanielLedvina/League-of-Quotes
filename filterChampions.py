@@ -4,14 +4,12 @@ import json
 import shutil
 import os
 
-public_dir = os.path.join('public', 'images', 'champion-pfp')
-os.makedirs(public_dir, exist_ok=True)
-
-# New directories for splash arts and figures
-splashart_dir = os.path.join('public', 'images', 'champion-splashart')
-figure_dir = os.path.join('public', 'images', 'champion-figure')
+champion_pfp_dir = os.path.join('server', 'assets', 'champion-pfp')
+splashart_dir = os.path.join('server', 'assets', 'champion-splashart')
+figure_dir = os.path.join('server', 'assets', 'champion-figure')
 os.makedirs(splashart_dir, exist_ok=True)
 os.makedirs(figure_dir, exist_ok=True)
+os.makedirs(champion_pfp_dir, exist_ok=True)
 
 
 # Function to download images
@@ -182,7 +180,7 @@ for champion in champions:
     if img:
         img_url = img.get("data-src") or img.get("src")
         if img_url.startswith("http"):
-            img_path = os.path.join(public_dir, f"{champion}.png")
+            img_path = os.path.join(champion_pfp_dir, f"{champion}.png")
 
             # Download the image if the URL exists
             print(f"Downloading image for {champion} from {img_url}")
@@ -233,7 +231,7 @@ for champion in champions:
         "rangeType": range_type,
         "region": region,
         "difficulty": difficulty_level,
-        "image": f"public/images/champion-pfp/{champion}.png"
+        "image": f"server/assets/champion-pfp/{champion}.png"
     }
 
 # Save the structured data to a JSON file

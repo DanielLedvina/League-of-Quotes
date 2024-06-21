@@ -10,6 +10,7 @@ const LogIn = () => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
+  const serverUrl = process.env.REACT_APP_API_URL;
 
   const {userData, setUserData, handleLogin, handleLogout, champions, loading, error, username, setUsername, password, setPassword, setError} = useAppContext();
 
@@ -132,69 +133,69 @@ const LogIn = () => {
   };
 
   return (
-    <section className='login'>
+    <section className="login">
       {!userData ? (
-        <section className='login-section'>
-          <section className='login-inputs'>
-            <section className='login-input'>
-              <label htmlFor='username'>Username</label>
-              <input type='text' id='username' placeholder='Enter your username' value={username} onChange={(e) => setUsername(e.target.value)} />
+        <section className="login-section">
+          <section className="login-inputs">
+            <section className="login-input">
+              <label htmlFor="username">Username</label>
+              <input type="text" id="username" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} />
             </section>
-            <section className='login-input'>
-              <label htmlFor='password'>Password</label>
-              <input type='password' id='password' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <section className="login-input">
+              <label htmlFor="password">Password</label>
+              <input type="password" id="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </section>
           </section>
-          <section className='login-buttons'>
-            <button className='login-button' onClick={() => handleLogin(username, password)}>
+          <section className="login-buttons">
+            <button className="login-button" onClick={() => handleLogin(username, password)}>
               Login
             </button>
-            <Link to='/register'>
-              <button className='register-button'>Register</button>
+            <Link to="/register">
+              <button className="register-button">Register</button>
             </Link>
           </section>
 
-          {error && <p className='error'>{error}</p>}
+          {error && <p className="error">{error}</p>}
         </section>
       ) : (
-        <section className='logined'>
-          <section className='users-info'>
-            <section className='users-welcome'>
+        <section className="logined">
+          <section className="users-info">
+            <section className="users-welcome">
               <h1>Welcome, {userData.username}</h1>
             </section>
-            <section className='users-name'>
+            <section className="users-name">
               <p>Username:</p>
-              <p className='info-details'>{userData.username}</p>
+              <p className="info-details">{userData.username}</p>
             </section>
-            <section className='users-champion'>
+            <section className="users-champion">
               <p>Favorite Champion:</p>
-              <div className='info-details'>{userData.favChampion && <img src={`/images/champion-pfp/${userData.favChampion}.png`} alt={userData.favChampion} key={userData.favChampion} onClick={handleImageClick} />}</div>
-              <div ref={dropdownRef} className='user-champion-choice'>
-                <input className='user-champion-input' type='text' value={input} onChange={handleInputChange} onFocus={handleInputFocus} onBlur={handleInputBlur} onKeyDown={handleKeyDown} placeholder='Enter champion name' ref={inputRef} style={{display: isFocused ? "block" : "none"}} />
+              <div className="info-details">{userData.favChampion && <img src={`${serverUrl}/images/champion-pfp/${userData.favChampion}.png`} alt={userData.favChampion} key={userData.favChampion} onClick={handleImageClick} />}</div>
+              <div ref={dropdownRef} className="user-champion-choice">
+                <input className="user-champion-input" type="text" value={input} onChange={handleInputChange} onFocus={handleInputFocus} onBlur={handleInputBlur} onKeyDown={handleKeyDown} placeholder="Enter champion name" ref={inputRef} style={{display: isFocused ? "block" : "none"}} />
                 {isFocused && filteredNames.length > 0 ? (
-                  <ul className='user-filtered-names'>
+                  <ul className="user-filtered-names">
                     {filteredNames.slice(0, 4).map((name, index) => (
-                      <li className='user-champion-select' key={name} onMouseDown={(e) => e.preventDefault()} onClick={() => handleListItemClick(name)} onMouseEnter={() => setSelectedIndex(index)} style={{backgroundColor: index === selectedIndex ? "#7f7f7f" : "transparent"}}>
-                        <img className='user-champion-select-img' src={`/images/champion-pfp/${name}.png`} alt={`${name} img`} loading='lazy' />
-                        <p className='user-champion-select-name'>{name}</p>
+                      <li className="user-champion-select" key={name} onMouseDown={(e) => e.preventDefault()} onClick={() => handleListItemClick(name)} onMouseEnter={() => setSelectedIndex(index)} style={{backgroundColor: index === selectedIndex ? "#7f7f7f" : "transparent"}}>
+                        <img className="user-champion-select-img" src={`${serverUrl}/images/champion-pfp/${name}.png`} alt={`${name} img`} loading="lazy" />
+                        <p className="user-champion-select-name">{name}</p>
                       </li>
                     ))}
                   </ul>
                 ) : null}
               </div>
             </section>
-            <section className='users-quote'>
+            <section className="users-quote">
               <p>Favorite Quote:</p>
-              <p className='info-details'>Some quote here...</p>
+              <p className="info-details">Some quote here...</p>
             </section>
-            <section className='users-background'>
+            <section className="users-background">
               <p>Background:</p>
-              <p className='info-details'>Some background here...</p>
+              <p className="info-details">Some background here...</p>
             </section>
           </section>
 
           <button
-            className='user-champion-new-guess-button'
+            className="user-champion-new-guess-button"
             onClick={() => {
               handleLogout();
               setPassword("");

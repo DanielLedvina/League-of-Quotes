@@ -103,7 +103,7 @@
                 "rangeType": "Ranged",
                 "region": "Shurima",
                 "difficulty": "3",
-                "image": "public/images/champion-pfp/Azir.png"
+                "image": "server/assets/champion-pfp/Azir.png"
             },
             "Nami": {
                 "quotes": [
@@ -142,7 +142,7 @@
                 "rangeType": "Ranged",
                 "region": "Runeterra",
                 "difficulty": "2",
-                "image": "public/images/champion-pfp/Nami.png"
+                "image": "server/assets/champion-pfp/Nami.png"
             },
             "Poppy": {
                 "quotes": [
@@ -227,7 +227,7 @@
                 "rangeType": "Melee",
                 "region": "Demacia",
                 "difficulty": "2",
-                "image": "public/images/champion-pfp/Poppy.png"
+                "image": "server/assets/champion-pfp/Poppy.png"
             },
             "Akali": {
                 "quotes": [
@@ -355,7 +355,7 @@
                 "rangeType": "Melee",
                 "region": "Ionia",
                 "difficulty": "2",
-                "image": "public/images/champion-pfp/Akali.png"
+                "image": "server/assets/champion-pfp/Akali.png"
             }
         }
     }

@@ -9,6 +9,7 @@ const DropdownUserInput = ({onGuess, disabled, championGuessed, guessedChampions
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
+  const serverUrl = process.env.REACT_APP_API_URL;
 
   // Filter out guessed champions
   const names = champions ? Object.keys(champions).filter((name) => !championGuessed.includes(name)) : [];
@@ -103,7 +104,7 @@ const DropdownUserInput = ({onGuess, disabled, championGuessed, guessedChampions
         <ul className="filtered-names">
           {filteredNames.slice(0, 4).map((name, index) => (
             <li className="champion-select" key={name} onMouseDown={(e) => e.preventDefault()} onClick={() => handleListItemClick(name)} onMouseEnter={() => setSelectedIndex(index)} style={{backgroundColor: index === selectedIndex ? "#7f7f7f" : "transparent"}} ref={guessedChampions}>
-              <img className="champion-select-img" src={`/images/champion-pfp/${name}.png`} alt={name + " img"} loading="lazy" />
+              <img className="champion-select-img" src={`${serverUrl}/images/champion-pfp/${name}.png`} alt={name + " img"} loading="lazy" />
               <p className="champion-select-name">{name}</p>
             </li>
           ))}

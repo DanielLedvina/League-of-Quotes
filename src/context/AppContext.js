@@ -14,6 +14,7 @@ export const AppProvider = ({children}) => {
 
   useEffect(() => {
     fetchChampions();
+    fetchUserData();
   }, []);
 
   const fetchUserData = async () => {
@@ -62,6 +63,7 @@ export const AppProvider = ({children}) => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({username: usernameInput, password: passwordInput}),
       });
 
