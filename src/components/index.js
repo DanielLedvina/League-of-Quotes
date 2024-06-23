@@ -6,3 +6,4 @@ export {default as Header} from "./Header/Header.jsx";
 export {default as Profile} from "./Profile/Profile.jsx";
 export {default as Register} from "./Register/Register.jsx";
 export {default as RegistrationDlg} from "./RegistrationDlg/RegistrationDlg.jsx";
+export {default as ConfettiCanvas} from "./ConfettiComponent/ConfettiComponent.jsx";

@@ -157,14 +157,14 @@ h6 {
 
 @media (max-width: 600px) {
   .champion-new-guess-button {
-    height: 4rem;
-    font-size: 1.5rem;
-    width: 450px;
+    height: 4rem !important;
+    font-size: 1.5rem !important;
+    width: 450px !important;
   }
   .champion-input {
-    height: 4rem;
-    font-size: 1.5rem;
-    width: 450px;
+    height: 4rem !important;
+    font-size: 1.5rem !important;
+    width: 450px !important;
   }
   .champion-random-quote-section {
     width: 450px !important;
@@ -182,12 +182,12 @@ h6 {
 }
 @media (max-width: 497px) {
   .champion-new-guess-button {
-    height: 4rem;
-    width: 400px;
+    height: 4rem !important;
+    width: 400px !important;
   }
   .champion-input {
-    height: 4rem;
-    width: 400px;
+    height: 4rem !important;
+    width: 400px !important;
   }
   .champion-random-quote-section {
     width: 400px !important;
@@ -204,12 +204,12 @@ h6 {
 }
 @media (max-width: 425px) {
   .champion-new-guess-button {
-    height: 4rem;
-    width: 280px;
+    height: 4rem !important;
+    width: 280px !important;
   }
   .champion-input {
-    height: 4rem;
-    width: 280px;
+    height: 4rem !important;
+    width: 280px !important;
   }
   .champion-random-quote-section {
     width: 280px !important;

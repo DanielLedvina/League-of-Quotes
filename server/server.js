@@ -252,7 +252,6 @@ app.post("/api/register", async (req, res) => {
 });
 
 function isAuthenticated(req, res, next) {
-  console.log(req.session.user);
   if (req.session.user) {
     next();
   } else {

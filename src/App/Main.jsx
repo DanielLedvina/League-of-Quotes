@@ -22,7 +22,18 @@ const Main = () => {
   const quoteRef = useRef(null);
   const quoteContainerRef = useRef(null);
   const [championGuessed, setChampionGuessed] = useState([]);
-  let guessedChampions = useRef([]);
+  const correctGuessRef = useRef(null);
+
+  useEffect(() => {
+    if (correctGuess !== null) {
+      setTimeout(() => {
+        const element = document.querySelector(".correct-guess");
+        if (element) {
+          element.scrollIntoView({behavior: "smooth", block: "end"});
+        }
+      }, 1000);
+    }
+  }, [correctGuess]);
 
   const hintHeadingProp = [{text: "Champion"}, {text: "Release date"}, {text: "Position"}, {text: "Resource"}, {text: "Range type"}, {text: "Region"}];
 
@@ -34,7 +45,6 @@ const Main = () => {
         parent: document.querySelector(".champion-random-quote-section"),
       });
     }
-    console.log(guessedChampions);
   }, [loading]);
 
   useEffect(() => {
@@ -85,11 +95,11 @@ const Main = () => {
     let maxFontSize;
 
     if (window.innerWidth <= 497) {
-      maxFontSize = 2;
+      maxFontSize = 1.5;
     } else if (window.innerWidth <= 600) {
-      maxFontSize = 2.5;
+      maxFontSize = 2;
     } else {
-      maxFontSize = 3; // Default max font size for larger screens
+      maxFontSize = 2.8; // Default max font size for larger screens
     }
 
     let i = 0.5;
@@ -108,8 +118,6 @@ const Main = () => {
 
     const formattedInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
     const guessedChampion = champions[formattedInput];
-    guessedChampions.current = [...guessedChampions.current, guessedChampion];
-    console.log(guessedChampions);
     if (guessedChampion) {
       const {release, position, resource, rangeType, region, image} = guessedChampion;
       if (formattedInput.toLowerCase() === quoteData.champion.toLowerCase()) {
@@ -126,7 +134,6 @@ const Main = () => {
         setFeedback("Correct! Well played. Try the next one!");
         setChampionGuessed([]); // Reset guessed champions on correct guess
       } else {
-        setFeedback("Not quite right, keep guessing!");
         const guessedChampionObj = {
           champion: formattedInput,
           release,
@@ -166,13 +173,12 @@ const Main = () => {
             </p>
           </section>
           <section className="champion-input-section">
-            <DropdownUserInput onGuess={handleGuess} disabled={!!correctGuess} championGuessed={championGuessed} ref={guessedChampions} />
-
+            <DropdownUserInput onGuess={handleGuess} disabled={!!correctGuess} championGuessed={championGuessed} />
             <button className="champion-new-guess-button" onClick={startNewGuess}>
               New Quote
             </button>
           </section>
-          <CorrectGuess correctGuess={correctGuess} feedbackGuess={feedback} />
+          <CorrectGuess correctGuess={correctGuess} feedbackGuess={feedback} ref={correctGuessRef} />
           <section className="hint-box-section">
             {hintBoxesData.length > 0 && (
               <section className="champion-hint-headings">
