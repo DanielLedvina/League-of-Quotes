@@ -2,10 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
 import "./Header.css";
+import config from "../../config/config";
 
 const Header = () => {
   const {userData, setPassword, setUsername} = useAppContext();
-  const serverUrl = process.env.REACT_APP_API_URL;
+  const serverUrl = config.REACT_APP_API_URL;
 
   const handleLogout = () => {
     // Reset the username and password fields
@@ -20,7 +21,7 @@ const Header = () => {
         </Link>
         <section className="bottom-links">
           <div className="tooltip-container">
-            <Link to="/profile" className="nav-link">
+            <Link to="/login" className="nav-link">
               <img src={userData?.favChampion ? `${serverUrl}/images/champion-pfp/${userData.favChampion}.png` : `${serverUrl}/images/profile/default-pfp.png`} alt="profile-pfp" className="profile-pfp" />
             </Link>
             <span className="tooltip-text">Profile</span>

@@ -1,0 +1,54 @@
+.register {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 550px;
+  height: 100%;
+}
+.register-inputs,
+.register-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+.register-inputs input {
+  padding: 5px;
+  height: 4rem;
+  font-size: 1.5rem;
+  padding: 0px 4rem;
+  width: 350px;
+  background-color: var(--lol-background-color);
+  border: var(--lol-border-gold);
+  color: var(--lol-text-color);
+}
+.register-inputs label {
+  display: flex;
+  margin: 5px 0;
+  font-size: 1.2rem;
+  width: 350px;
+  color: var(--lol-text-color);
+}
+.register-buttons {
+  margin-top: 1.25rem;
+}
+
+.login-button,
+.register-button {
+  cursor: pointer;
+  outline: none;
+  border-style: solid;
+  margin-bottom: 3px;
+  height: 3rem;
+  font-size: 1.5rem;
+  width: 350px;
+  background-color: var(--lol-background-color);
+  color: var(--lol-text-color);
+  border: 1px solid #a09b8c;
+}
+
+.email-envelope {
+  filter: brightness(0) saturate(100%) invert(85%) sepia(20%) saturate(200%) hue-rotate(10deg) brightness(95%) contrast(85%);
+}

@@ -1,5 +1,6 @@
 .login {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   width: 550px;
@@ -20,11 +21,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 8px;
 }
 .login-inputs input {
   padding: 5px;
   height: 4rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  padding: 0px 4rem;
   width: 350px;
   background-color: var(--lol-background-color);
   border: var(--lol-border-gold);
@@ -33,34 +36,32 @@
 .login-inputs label {
   display: flex;
   margin: 5px 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
   width: 350px;
   color: var(--lol-text-color);
 }
 
 .login-buttons {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 .login-button,
 .register-button {
   cursor: pointer;
   outline: none;
-  border-style: solid;
   margin-bottom: 3px;
   height: 3rem;
   font-size: 1.5rem;
   width: 350px;
   background-color: var(--lol-background-color);
+  border-image: linear-gradient(var(--lol-blue-4), var(--lol-blue-2)) 20;
   color: var(--lol-text-color);
-  border: 1px solid #a09b8c;
 }
 
 .logined {
   display: flex;
   flex-direction: column;
   width: 550px;
-  background-color: var(--lol-background-color);
   color: var(--lol-text-color);
 }
 li p {
@@ -68,6 +69,20 @@ li p {
   align-items: center;
   justify-content: center;
 }
+
+.loading-spinner {
+  width: 500px; /* Adjust size as needed */
+  height: 500px; /* Adjust size as needed */
+  animation: zoomInOut 1s infinite alternate;
+  background: url("../../../public/images/logo/leagueOfQuotesLogo.png") no-repeat center center;
+}
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* USER SECTION */
 .users-info {
   display: flex;
@@ -75,6 +90,7 @@ li p {
   justify-content: left;
   text-align: center;
   padding: 5px;
+  background-color: var(--lol-background-color);
   border: var(--lol-border-gold);
 }
 .users-welcome {
@@ -135,7 +151,7 @@ li p {
   color: var(--lol-text-color);
   opacity: 0.9;
 }
-.user-champion-new-guess-button {
+.user-logout-button {
   cursor: pointer;
   outline: none;
   border-style: solid;

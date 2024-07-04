@@ -1,11 +1,12 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useMemo} from "react";
 import {DropdownUserInput, HintBox, CorrectGuess, Header} from "../components";
 import "./Main.css";
 import debounce from "lodash/debounce";
 import {useAppContext} from "../context/AppContext"; // Import the context
 
 const Main = () => {
-  const {champions, loading} = useAppContext(); // Use context to get champions and loading
+  const {champions: rawChampions, loading} = useAppContext(); // Use context to get champions and loading
+  const champions = useMemo(() => rawChampions, [rawChampions]);
   const [quoteData, setQuoteData] = useState({
     champion: "",
     quote: "",
@@ -16,30 +17,41 @@ const Main = () => {
     region: "",
     image: "",
   });
-  const [feedback, setFeedback] = useState("");
   const [hintBoxesData, setHintBoxesData] = useState([]);
   const [correctGuess, setCorrectGuess] = useState(null);
   const quoteRef = useRef(null);
   const quoteContainerRef = useRef(null);
   const [championGuessed, setChampionGuessed] = useState([]);
-  const correctGuessRef = useRef(null);
-
-  useEffect(() => {
-    if (correctGuess !== null) {
-      setTimeout(() => {
-        const element = document.querySelector(".correct-guess");
-        if (element) {
-          element.scrollIntoView({behavior: "smooth", block: "end"});
-        }
-      }, 1000);
-    }
-  }, [correctGuess]);
-
+  const [showCorrectGuessComponent, setShowCorrectGuessComponent] = useState(false);
   const hintHeadingProp = [{text: "Champion"}, {text: "Release date"}, {text: "Position"}, {text: "Resource"}, {text: "Range type"}, {text: "Region"}];
 
   useEffect(() => {
+    if (correctGuess !== null) {
+      setShowCorrectGuessComponent(true);
+    }
+  }, [correctGuess]);
+
+  // Scroll to the last guessed champion
+  useEffect(() => {
+    const element = document.querySelector(".hint-box-section");
+    if (element) {
+      element.scrollIntoView({behavior: "smooth", block: "end"});
+    }
+  }, [championGuessed]);
+
+  // Scroll to the correct guess
+  useEffect(() => {
+    if (correctGuess == null) return;
+    setTimeout(() => {
+      const correctGuessElement = document.querySelector(".correct-guess");
+      if (!correctGuessElement) return;
+      correctGuessElement.scrollIntoView({behavior: "smooth", block: "end"});
+    }, 2800);
+  }, [correctGuess]);
+
+  useEffect(() => {
     if (!loading) {
-      setQuoteData(getRandomChampionAndQuote());
+      setQuoteData(fetchRandomChampionAndQuote());
       resizeText({
         element: document.querySelector(".champion-quote"),
         parent: document.querySelector(".champion-random-quote-section"),
@@ -60,7 +72,7 @@ const Main = () => {
     };
   }, [quoteData]);
 
-  function getRandomChampionAndQuote() {
+  const fetchRandomChampionAndQuote = () => {
     if (loading || !champions) return {champion: "No champions available", quote: "No quotes available."};
     const championKeys = Object.keys(champions);
 
@@ -81,8 +93,10 @@ const Main = () => {
         region,
         image,
       };
-    } else return {champion: selectedChampion, quote: "No quotes available for this champion."};
-  }
+    } else {
+      return {champion: selectedChampion, quote: "No quotes available for this champion."};
+    }
+  };
 
   const isOverflown = (element) => element.scrollHeight > element.clientHeight;
 
@@ -95,11 +109,11 @@ const Main = () => {
     let maxFontSize;
 
     if (window.innerWidth <= 497) {
-      maxFontSize = 1.5;
+      maxFontSize = 1.8; // default font size for small screen
     } else if (window.innerWidth <= 600) {
-      maxFontSize = 2;
+      maxFontSize = 2; // default font size for medium screen
     } else {
-      maxFontSize = 2.8; // Default max font size for larger screens
+      maxFontSize = 2.8; // default font size for large screen
     }
 
     let i = 0.5;
@@ -113,54 +127,46 @@ const Main = () => {
     element.style.fontSize = `${i - 0.1}rem`; // Set to last non-overflowing size
   };
 
-  function handleGuess(userInput) {
+  const handleGuess = (userInput) => {
     if (loading) return;
 
     const formattedInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
     const guessedChampion = champions[formattedInput];
     if (guessedChampion) {
       const {release, position, resource, rangeType, region, image} = guessedChampion;
+      const guessedChampionObj = {
+        champion: formattedInput,
+        release,
+        position,
+        resource,
+        rangeType,
+        region,
+        image,
+      };
+      const realChampion = quoteData;
       if (formattedInput.toLowerCase() === quoteData.champion.toLowerCase()) {
-        setCorrectGuess({
-          champion: formattedInput,
-          release,
-          position,
-          resource,
-          rangeType,
-          region,
-          image,
-        });
-
-        setFeedback("Correct! Well played. Try the next one!");
+        setCorrectGuess(guessedChampionObj);
         setChampionGuessed([]); // Reset guessed champions on correct guess
+        setHintBoxesData(hintBoxesData.concat({guessedChampion: guessedChampionObj, realChampion}));
       } else {
-        const guessedChampionObj = {
-          champion: formattedInput,
-          release,
-          position,
-          resource,
-          rangeType,
-          region,
-          image,
-        };
-
-        const realChampion = quoteData;
-
-        setHintBoxesData(hintBoxesData.concat({quessedChampion: guessedChampionObj, realChampion}));
+        setTimeout(() => {
+          const element = document.querySelector(".hint-box-section");
+          if (element) {
+            element.scrollIntoView({behavior: "smooth", block: "end"});
+          }
+        }, 100);
+        setHintBoxesData(hintBoxesData.concat({guessedChampion: guessedChampionObj, realChampion}));
         setChampionGuessed([...championGuessed, formattedInput]); // Add wrong guess to the list
       }
-    } else {
-      setFeedback("Champion not found. Please try again.");
     }
-  }
+  };
 
-  function startNewGuess() {
+  const startNewGuess = () => {
     setCorrectGuess(null);
     setHintBoxesData([]);
-    setQuoteData(getRandomChampionAndQuote());
-    setFeedback("");
+    setQuoteData(fetchRandomChampionAndQuote());
     setChampionGuessed([]);
-  }
+  };
 
   return (
     <div className="App">
@@ -178,26 +184,22 @@ const Main = () => {
               New Quote
             </button>
           </section>
-          <CorrectGuess correctGuess={correctGuess} feedbackGuess={feedback} ref={correctGuessRef} />
           <section className="hint-box-section">
             {hintBoxesData.length > 0 && (
               <section className="champion-hint-headings">
                 {hintHeadingProp.map((prop) => (
-                  <>
-                    <div className="hint-heding-values">
-                      <p className="hint-heading" key={prop.text}>
-                        {prop.text}
-                      </p>
-                      <hr />
-                    </div>
-                  </>
+                  <label className="hint-heding-values" key={prop.text}>
+                    <p className="hint-heading">{prop.text}</p>
+                    <hr />
+                  </label>
                 ))}
               </section>
             )}
-            {hintBoxesData.map(({quessedChampion, realChampion}, index) => (
-              <HintBox key={index} quessedChampion={quessedChampion} realChampion={realChampion} />
+            {hintBoxesData.map(({guessedChampion, realChampion}, index) => (
+              <HintBox key={index} guessedChampion={guessedChampion} realChampion={realChampion} />
             ))}
           </section>
+          <section>{<CorrectGuess correctGuess={correctGuess} className={showCorrectGuessComponent ? "" : "hidden"} />}</section>
         </section>
       )}
     </div>

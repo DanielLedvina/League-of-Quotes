@@ -1,0 +1,44 @@
+.log-reg-bar {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  margin-bottom: 2rem;
+}
+
+.log-reg-bar-links {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  position: relative;
+}
+
+.log-reg-bar-link {
+  text-decoration: none;
+  color: var(--lol-grey-1);
+  font-weight: bold;
+  padding: 10px 20px;
+  flex: 1; /* Ensures each link takes equal space */
+  text-align: center; /* Center text within each link */
+  font-size: 1.2rem;
+}
+
+.log-reg-bar-link.active,
+.log-reg-bar-link:hover {
+  color: var(--lol-text-color);
+}
+
+.slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%; /* Width matches one of the links */
+  background-color: var(--lol-text-color);
+}
+
+.inactive-slider {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 50%;
+  background-color: var(--lol-grey-1);
+}

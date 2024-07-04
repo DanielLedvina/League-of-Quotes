@@ -1,6 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Header, RegistrationDlg} from "../../components";
-import {Navigate} from "react-router-dom";
+import {Navigate, Link} from "react-router-dom";
+import LogRegBar from "../LogRegBar/LogRegBar";
+import config from "../../config/config";
+import "./Register.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +15,7 @@ const Register = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [redirect, setRedirect] = useState(null);
+  const serverUrl = config.REACT_APP_API_URL;
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -33,20 +37,37 @@ const Register = () => {
 
     if (response.ok) {
       setRedirect({
-        pathname: "/profile",
+        pathname: "/login",
         state: {fromRegistration: true, message: "Registration Successful!"},
       });
     }
   };
 
   return (
-    <section>
+    <section className="register">
       <Header />
+      <LogRegBar />
       <form onSubmit={handleSubmit}>
-        <input name='username' type='text' placeholder='Username' onChange={handleChange} />
-        <input name='password' type='password' placeholder='Password' onChange={handleChange} />
-        <input name='email' type='email' placeholder='Email' onChange={handleChange} />
-        <input type='submit' value='Register' />
+        <section className="register-inputs">
+          <section className="input-container">
+            <img src="/images/emotes/email-envelope.webp" alt="email-envelope" className="input-icon email-envelope" />
+            <input name="email" type="email" placeholder="Enter your email" onChange={handleChange} />
+          </section>
+          <section className="input-container">
+            <img src={`${serverUrl}/images/profile/default-pfp.png`} alt="default-pfp" className="input-icon" />
+            <input name="username" type="text" placeholder="Enter your username" onChange={handleChange} />
+          </section>
+          <section className="input-container">
+            <img src="/images/emotes/key-password.webp" alt="key-password" className="input-icon" />
+            <input name="password" type="password" placeholder="Enter your password" onChange={handleChange} />
+          </section>
+
+          <section className="register-buttons">
+            <button className="register-button" type="submit">
+              Sign up
+            </button>
+          </section>
+        </section>
       </form>
       <RegistrationDlg isOpen={showModal} onClose={() => setShowModal(false)}>
         <p>{modalMessage}</p>

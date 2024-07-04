@@ -5,8 +5,8 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {AppProvider} from "./context/AppContext";
 import "./index.css";
 import Main from "./App/Main";
-import Profile from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
+import LogIn from "./components/LogIn/LogIn";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -14,9 +14,9 @@ root.render(
   <AppProvider>
     <Router>
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/register' element={<Register />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LogIn />} />
       </Routes>
     </Router>
   </AppProvider>

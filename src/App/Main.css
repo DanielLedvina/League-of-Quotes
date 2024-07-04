@@ -12,7 +12,7 @@
   flex-direction: row;
   justify-content: center;
   max-width: 550px;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .champion-random-quote-section {
@@ -44,7 +44,7 @@
 .hint-box-section {
   width: 100%;
   color: var(--lol-text-color);
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .champion-hint-headings {
   display: flex;
@@ -71,4 +71,8 @@
   margin: 0 5px; /* Slight separation between headings */
   color: var(--lol-text-color);
   padding-bottom: 4px; /* Ensure space for the line */
+}
+
+.hidden {
+  opacity: 0;
 }

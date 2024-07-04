@@ -1,7 +1,10 @@
 import React, {useState, useRef, useEffect} from "react";
 import "./LogIn.css";
 import {useAppContext} from "../../context/AppContext";
+import LogRegBar from "../LogRegBar/LogRegBar";
+import Header from "../Header/Header";
 import {Link} from "react-router-dom";
+import config from "../../config/config";
 
 const LogIn = () => {
   const [input, setInput] = useState("");
@@ -10,7 +13,7 @@ const LogIn = () => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
-  const serverUrl = process.env.REACT_APP_API_URL;
+  const serverUrl = config.REACT_APP_API_URL;
 
   const {userData, setUserData, handleLogin, handleLogout, champions, loading, error, username, setUsername, password, setPassword, setError} = useAppContext();
 
@@ -40,6 +43,17 @@ const LogIn = () => {
     }
   }, [error, setError]);
 
+  const handleLoginClick = async () => {
+    await handleLogin(username, password); // This should set loading true at start and false at end internally
+  };
+
+  if (loading) {
+    return (
+      <div className="loading-spinner-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
   const changeJsonData = async (champion) => {
     try {
       const response = await fetch("http://localhost:3001/api/changeUser1Champion", {
@@ -134,25 +148,25 @@ const LogIn = () => {
 
   return (
     <section className="login">
+      <Header />
       {!userData ? (
         <section className="login-section">
+          <LogRegBar />
           <section className="login-inputs">
-            <section className="login-input">
-              <label htmlFor="username">Username</label>
-              <input type="text" id="username" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            </section>
-            <section className="login-input">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </section>
+            <div className="input-container">
+              <img src={`${serverUrl}/images/profile/default-pfp.png`} alt="default-pfp" className="input-icon" />
+              <input type="text" id="username" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} className="password-input" />
+            </div>
+
+            <div className="input-container">
+              <img src="/images/emotes/key-password.webp" alt="key-password" className="input-icon" />
+              <input type="password" id="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="password-input" />
+            </div>
           </section>
           <section className="login-buttons">
-            <button className="login-button" onClick={() => handleLogin(username, password)}>
-              Login
+            <button className="login-button" onClick={handleLoginClick}>
+              Sign in
             </button>
-            <Link to="/register">
-              <button className="register-button">Register</button>
-            </Link>
           </section>
 
           {error && <p className="error">{error}</p>}
@@ -195,7 +209,7 @@ const LogIn = () => {
           </section>
 
           <button
-            className="user-champion-new-guess-button"
+            className="user-logout-button"
             onClick={() => {
               handleLogout();
               setPassword("");

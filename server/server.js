@@ -7,7 +7,9 @@ const path = require("path");
 const crypto = require("crypto");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
+const mysql2 = require("mysql2");
 require("dotenv").config();
+const bcrypt = require("bcrypt");
 const app = express();
 const localhostPort = process.env.REACT_APP_LOCALHOST_PORT || 3000;
 const serverPort = process.env.REACT_APP_PORT || 3001;
@@ -29,6 +31,18 @@ app.use(
     },
   })
 );
+
+const mysql = mysql2,
+  dbpool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_SCHEME,
+    connectionLimit: 100,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
+    waitForConnections: true,
+  });
 
 const options = {
   definition: {
@@ -203,7 +217,7 @@ const transporter = nodemailer.createTransport({
   secure: true, // Use true for port 465
   auth: {
     user: process.env.REACT_APP_EMAIL,
-    pass: process.env.REACT_APP_PASSWORD,
+    pass: process.env.REACT_APP_EMAIL_PASSWORD,
     clientId: process.env.REACT_APP_CLIENTID,
     clientSecret: process.env.REACT_APP_CLIENTSECRET,
   },
@@ -219,6 +233,23 @@ app.post("/api/register", async (req, res) => {
   if (fs.existsSync(path.join(__dirname, `./data/users/${username}.json`))) {
     return res.status(409).json({message: "User already exists"});
   }
+
+  // async function hashPassword(password) {
+  //   // Generate a salt with 10 rounds (default)
+  //   const salt = await bcrypt.genSalt(10);
+  //   // Hash the password with the salt
+  //   const hash = await bcrypt.hash(password, salt);
+  //   return hash;
+  // }
+
+  // const hashedPassword = await hashPassword(password);
+
+  // const verificationToken = crypto.randomBytes(20).toString("hex");
+
+  // dbpool.query("INSERT into users(username, pass, favChampionId, token, email) values(?,?,(select id from champions where champ_name = 'Azir' ),?, ?)", [username, hashedPassword, verificationToken, email], (err, results) => {
+  //   console.log(err);
+  //   console.log(results);
+  // });
 
   const verificationToken = crypto.randomBytes(20).toString("hex");
 

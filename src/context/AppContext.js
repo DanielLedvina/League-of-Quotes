@@ -1,5 +1,6 @@
 import React, {createContext, useState, useEffect, useContext} from "react";
 import axios from "axios";
+import config from "../config/config";
 
 const AppContext = createContext();
 
@@ -11,6 +12,7 @@ export const AppProvider = ({children}) => {
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const serverUrl = config.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchChampions();
@@ -33,12 +35,10 @@ export const AppProvider = ({children}) => {
       } else {
         console.log("Response not OK. Status:", response.status, response.statusText);
         setUserData(null);
-        setError("Failed to fetch user data: " + response.statusText);
       }
     } catch (err) {
       console.error("Error fetching user data:", err);
       setUserData(null);
-      setError("Failed to fetch user data");
     } finally {
       setLoadingUser(false);
     }
@@ -56,25 +56,28 @@ export const AppProvider = ({children}) => {
     }
   };
 
-  const handleLogin = async (usernameInput, passwordInput) => {
+  const handleLogin = async (username, password) => {
+    setLoading(true); // Set loading to true at the beginning of the login process
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
+      // Simulate a login request
+      const response = await fetch(`${serverUrl}/api/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({username: usernameInput, password: passwordInput}),
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password}),
       });
-
-      if (!response.ok) throw setError("Invalid username or password");
-
-      await fetchUserData();
-      setError("");
-      setUsername("");
-      setPassword("");
-    } catch (err) {
-      setError("Error logging in");
+      if (response.ok) {
+        const userData = await response.json();
+        setUserData(userData);
+        // Other login success operations
+      } else {
+        throw new Error("Failed to login");
+      }
+    } catch (error) {
+      setError(error.message); // Set error message if login fails
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 

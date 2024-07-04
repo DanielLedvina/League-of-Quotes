@@ -1,17 +1,131 @@
+.guess-feedback-section,
+.correct-guess-img {
+  opacity: 0; /* Start elements as invisible */
+  visibility: hidden; /* Ensures the element does not interact or block other elements */
+}
+@keyframes fadeInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+.guess-feedback-section {
+  animation: fadeInFromTop 1s ease-out forwards; /* 'forwards' makes the element retain the style values from the last keyframe */
+}
+
+.correct-guess-img {
+  animation: fadeInFromTop 1s ease-out 0.5s forwards; /* Delayed start and keeps final state */
+}
+
+.hover-bubble {
+  animation: fadeInFromTop 0s ease-out 2s forwards; /* Delayed start and keeps final state */
+}
+
 .correct-guess {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 550px;
-  background-color: var(--lol-background-color);
   color: var(--lol-text-color);
 }
 .correct-guess-img {
   width: 100%;
   height: 50%;
 }
-.champion-atributes {
+.guess-feedback-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 5px;
+  background-color: var(--lol-hextech-black);
+  border: 2px solid var(--lol-gold);
+}
+.guess-congratulation {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.correct-guess-img-container {
+  position: relative;
+  cursor: pointer;
+}
+.correct-guess-img {
+  width: 100%;
+  margin: 0 1px;
+  border: 2px solid var(--lol-grey-1);
+  box-shadow: 0px 0px 10px 0px var(--lol-blue-1);
+}
+.champion-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  visibility: hidden; /* Hide links initially */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}
+.champion-link {
+  text-decoration: none;
+  color: var(--lol-text-color);
+}
+.champion-link:hover {
+  color: var(--lol-gold);
+}
+
+.correct-guess-img-container:hover .champion-links {
+  visibility: visible;
+  opacity: 1;
+}
+.hr-link {
+  width: 200px;
+  margin: 10px 0px;
+}
+.hover-bubble {
+  position: absolute;
+  padding: 8px 15px;
+  background-color: var(--lol-hextech-black);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.correct-guess-img-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

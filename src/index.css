@@ -155,13 +155,28 @@ h6 {
   flex-direction: column;
 }
 
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+}
+
 @media (max-width: 600px) {
-  .champion-new-guess-button {
-    height: 4rem !important;
-    font-size: 1.5rem !important;
+  .correct-guess,
+  .hint-box,
+  .filtered-names,
+  .champion-select {
     width: 450px !important;
   }
-  .champion-input {
+  .champion-input,
+  .champion-new-guess-button {
     height: 4rem !important;
     font-size: 1.5rem !important;
     width: 450px !important;
@@ -173,41 +188,50 @@ h6 {
   .league-of-quotes-heading {
     font-size: 3.5rem !important;
   }
-  .correct-guess {
+  .hint-box-section {
     width: 450px !important;
+    font-size: 0.8rem !important;
   }
-  .hint-box {
-    width: 450px !important;
+  .hint-box-section img {
+    height: 80%;
+    width: 80%;
   }
 }
 @media (max-width: 497px) {
-  .champion-new-guess-button {
-    height: 4rem !important;
-    width: 400px !important;
-  }
-  .champion-input {
-    height: 4rem !important;
-    width: 400px !important;
-  }
+  .correct-guess,
+  .hint-box,
+  .filtered-names,
+  .champion-select,
   .champion-random-quote-section {
     width: 400px !important;
   }
-  .league-of-quotes-heading {
+  .champion-input,
+  .champion-new-guess-button {
+    height: 4rem !important;
+    width: 400px !important;
+  }
+  h1 {
     font-size: 3rem !important;
   }
-  .correct-guess {
+  .hint-box-section {
     width: 400px !important;
+    font-size: 0.7rem !important;
   }
-  .hint-box {
-    width: 400px !important;
+  .hint-box-section img {
+    height: 70%;
+    width: 80%;
   }
 }
 @media (max-width: 425px) {
-  .champion-new-guess-button {
-    height: 4rem !important;
+  .correct-guess,
+  .hint-box,
+  .filtered-names,
+  .champion-select,
+  .champion-random-quote-section {
     width: 280px !important;
   }
-  .champion-input {
+  .champion-input,
+  .champion-new-guess-button {
     height: 4rem !important;
     width: 280px !important;
   }
@@ -217,11 +241,5 @@ h6 {
   }
   .league-of-quotes-heading {
     font-size: 2.3rem !important;
-  }
-  .correct-guess {
-    width: 280px !important;
-  }
-  .hint-box {
-    width: 280px !important;
   }
 }

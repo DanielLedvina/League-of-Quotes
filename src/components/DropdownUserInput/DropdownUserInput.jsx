@@ -1,6 +1,7 @@
 import React, {useState, useRef} from "react";
 import "./DropdownUserInput.css";
 import {useAppContext} from "../../context/AppContext"; // Import the context
+import config from "../../config/config";
 
 const DropdownUserInput = ({onGuess, disabled, championGuessed, guessedChampions}) => {
   const {champions, loading} = useAppContext(); // Use context to get champions and loading
@@ -9,7 +10,7 @@ const DropdownUserInput = ({onGuess, disabled, championGuessed, guessedChampions
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
-  const serverUrl = process.env.REACT_APP_API_URL;
+  const serverUrl = config.REACT_APP_API_URL;
 
   // Filter out guessed champions
   const names = champions ? Object.keys(champions).filter((name) => !championGuessed.includes(name)) : [];
